@@ -32,6 +32,9 @@ module.exports = function (context, callback) {
   if (hub_sig !== 'sha1='+ wt_sig) {
     return callback(null, 'invalid request');
   }
+  if (context.headers['x-github-event'] === 'ping' ) {
+    return callback(null, 'Ping success');
+  }
   if (release.prerelease === true) {
     return callback(null, 'invalid request');
   }
